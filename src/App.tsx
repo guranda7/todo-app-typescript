@@ -1,4 +1,5 @@
 import Main from "./components/Main/Main"
+import { GlobalStyles } from "./components/GlobalStyles/GlobalStyles"
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyles/>
       <Main/>
     </>
   )
