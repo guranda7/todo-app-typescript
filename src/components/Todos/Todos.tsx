@@ -9,6 +9,8 @@ type TPropsTypes = {
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
     inputValue: string
     setInputValue : React.Dispatch<React.SetStateAction<string>>
+    isDark: boolean;
+    setIsDark: React.Dispatch<React.SetStateAction<boolean>>//ეს მერე გააკეთე
 }
 
 import React from 'react'
@@ -25,8 +27,10 @@ export default function Todos({todos, setTodos, inputValue, setInputValue}: TPro
   const hadnleDelete = (id: number) => {
     setTodos(prevTodos => [...prevTodos.filter(todo => todo.id !== id)])
   }
+  
   const handleCheck = (id: number, event: React.ChangeEvent<HTMLInputElement>) => {
   setTodos(prevTodos => [...prevTodos.map(item => item.id === id ? {...item, isDone: event.target.checked} : item)])
+  
 }
 
 const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,6 +38,14 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       handleAdd()
     }
   }
+
+const counter = todos.filter((todo) => {
+  return !todo.isDone
+}).length; 
+
+const handleDeleteCompleted = () => {
+  
+}
   return (
     <TodosContainer>
         <StyledInput 
@@ -55,9 +67,13 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
                <DeleteIcon src="/images/icon-cross.svg" onClick={() => hadnleDelete(todo.id)}/>
                
             </List>
-          
         ))}
         </ListContainer>
+
+        <div>
+          <span>{counter} items left</span>
+          <div>delete completed</div>
+        </div>
       </TodosContainer>
   )
 }

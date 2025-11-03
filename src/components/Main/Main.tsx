@@ -11,8 +11,10 @@ import css from 'styled-components'
 
 import Todos from '../Todos/Todos'
 export default function Main() {
-     const [todos, setTodos] = useState<Todo[]>([])
-  const [inputValue, setInputValue] = useState<string>("")
+    const [todos, setTodos] = useState<Todo[]>([])
+    const [inputValue, setInputValue] = useState<string>("")
+    const [isDark, setIsDark] = useState<boolean>(false)
+    console.log(todos.length)
   return (
    <Wrapper>
     <Header>
@@ -24,6 +26,8 @@ export default function Main() {
           setTodos = {setTodos}
           inputValue = {inputValue}
           setInputValue = {setInputValue}
+          isDark = {isDark}
+          setIsDark = {setIsDark}
    />
     
    </Wrapper>
@@ -49,7 +53,7 @@ const Wrapper = styled.div`
 const Header = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 7rem;
+  gap: 20rem;
   margin-top: 4.8rem;
  
 `
