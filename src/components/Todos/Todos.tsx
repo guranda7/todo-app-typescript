@@ -44,8 +44,22 @@ const counter = todos.filter((todo) => {
 }).length; 
 
 const handleDeleteCompleted = () => {
-  
+  setTodos((prevTodos) => [...prevTodos.filter((todo) => !todo.isDone)] )
 }
+
+const handleShowAll = () => {
+  setTodos((prevTodos) => [...prevTodos.filter((todo) => {
+    return true
+  })])
+}
+const handleShowCompleted = () => {
+  setTodos((prevTodos) => [...prevTodos.filter((todo) => todo.isDone)])
+}
+
+const handleShowActive = () => {
+  setTodos((prevTodos) => [...prevTodos.filter((todo) => !todo.isDone)])
+}
+
   return (
     <TodosContainer>
         <StyledInput 
@@ -70,10 +84,16 @@ const handleDeleteCompleted = () => {
         ))}
         </ListContainer>
 
-        <div>
+        <TodoFooter>
           <span>{counter} items left</span>
-          <div>delete completed</div>
-        </div>
+          <div onClick={handleDeleteCompleted}>delete completed</div>
+        </TodoFooter>
+
+        <TodoSecondFooter>
+          <SecondFooterSpan onClick={handleShowAll}>All</SecondFooterSpan>
+          <SecondFooterSpan onClick={handleShowActive}>Active</SecondFooterSpan>
+          <SecondFooterSpan onClick={handleShowCompleted}>Completed</SecondFooterSpan>
+        </TodoSecondFooter>
       </TodosContainer>
   )
 }
@@ -148,4 +168,32 @@ const ListContainer = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none; /* remove bullets */
+`
+
+const TodoFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 32.7rem;
+  height: 4.8rem;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  color: #9495A5;
+`
+const TodoSecondFooter = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 32.7rem;
+  height: 4.8rem;
+  padding-left: 1rem;
+  font-size: 1.4rem;
+
+ 
+`
+
+const SecondFooterSpan = styled.span `
+  &:hover {
+    color: #3A7CFD;
+  }
+
+  cursor: pointer;
 `
