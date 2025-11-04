@@ -15,13 +15,12 @@ export default function Main() {
     const [inputValue, setInputValue] = useState<string>("")
     const [isDark, setIsDark] = useState<boolean>(false)
     
-
-  
+    
   return (
-   <Wrapper>
+   <Wrapper isDark={isDark}>
     <Header>
       <SpanTitle>T O D O</SpanTitle>
-      <Image src="/images/icon-moon.svg" alt="" />
+      <Image onClick={() => setIsDark(!isDark)} src= {isDark ? "/images/icon-moon.svg" : "/images/icon-sun.svg"}  alt="" />
     </Header>
     <Todos 
           todos = {todos}
@@ -36,7 +35,7 @@ export default function Main() {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{isDark: boolean}>`
   font-family: "Josefin Sans", sans-serif;;
   width: 37.5rem; 
   height: 100vh;
@@ -44,12 +43,19 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  background-image: url("images/bg-mobile-light.jpg");
-  background-color: #F8F8FF;
+  background-image: ${({ isDark }) => 
+    isDark 
+  ?
+  'url("images/bg-mobile-light.jpg")'
+  :'url("images/bg-mobile-dark.jpg")'};
+  background-color: ${({ isDark }) => 
+    isDark 
+    ? "#F8F8FF"
+    : "black"
+  };
   background-repeat: no-repeat;
   background-size: contain;
 
-  
   
 `
 

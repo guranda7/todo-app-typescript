@@ -17,7 +17,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 
-export default function Todos({todos, setTodos, inputValue, setInputValue}: TPropsTypes) {
+export default function Todos({todos, setTodos, inputValue, setInputValue, isDark, setIsDark}: TPropsTypes) {
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all")
 
     const handleAdd = () => {
@@ -69,17 +69,18 @@ const filteredTodos = todos.filter(todo => {
 })
   return (
     <TodosContainer>
-        <StyledInput 
+        <StyledInput isDark={isDark}
           type="text" 
           placeholder="Create a new todo…"
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
           onKeyDown={handleKeyDown}
+
         />
       <ListContainer>
         {filteredTodos.map((todo) => (
           
-            <List key={todo.id} style={{textDecoration: todo.isDone ? "line-through" : "~"}}>
+            <List isDark={isDark} key={todo.id} style={{textDecoration: todo.isDone ? "line-through" : "~"}}>
               <CheckBox>
                 <input type="checkbox" onChange={(event) => handleCheck(todo.id, event) } />
                 {todo.text}
@@ -91,15 +92,15 @@ const filteredTodos = todos.filter(todo => {
         ))}
         </ListContainer>
       {todos.length > 0 && (
-        <TodoFooter>
+        <TodoFooter isDark = {isDark}>
           <span>{counter} items left</span>
           <div onClick={handleDeleteCompleted}>delete completed</div>
         </TodoFooter>
       )}
-        <TodoSecondFooter>
-          <SecondFooterSpan onClick={() => setFilter("all")}>All</SecondFooterSpan>
-          <SecondFooterSpan onClick={() => setFilter("active")}>Active</SecondFooterSpan>
-          <SecondFooterSpan onClick={() => setFilter("completed")}>Completed</SecondFooterSpan>
+        <TodoSecondFooter isDark={isDark}>
+          <SecondFooterSpan isDark={isDark} onClick={() => setFilter("all")}>All</SecondFooterSpan>
+          <SecondFooterSpan isDark={isDark} onClick={() => setFilter("active")}>Active</SecondFooterSpan>
+          <SecondFooterSpan isDark={isDark} onClick={() => setFilter("completed")}>Completed</SecondFooterSpan>
         </TodoSecondFooter>
       </TodosContainer>
   )
@@ -108,24 +109,31 @@ const filteredTodos = todos.filter(todo => {
 const TodosContainer = styled.div`
  display: flex;
  flex-direction: column;
- gap: 2rem;
-
-
 
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{isDark: boolean}>`
  width: 32.7rem;
   height: 4.8rem;
   padding-left: 5rem;
   font-size: 1.6rem;
-  font-family: "Josefin Sans", sans-serif;  /* font for input text */
-  border: 2px solid #ccc;
+  font-family: "Josefin Sans", sans-serif; 
+  border: none;
   border-radius: 0.8rem;
   outline: none;
-  color: #333;  /* typed text color */
-  text-align: left; /* aligns typed text */
-  /* text-align: right; */ /* if you want right alignment */
+  color: ${({ isDark}) => 
+    !isDark 
+  ? "#767992"
+  : "#333"
+  
+  } ;  
+  text-align: left;
+  background-color: ${({ isDark}) => 
+    isDark 
+    ? "white"
+    : "#393A4B"
+  };
+
 
 
 
@@ -140,13 +148,13 @@ const StyledInput = styled.input`
   }
 `
 
-const List = styled.li`
+const List = styled.li<{isDark: boolean}>`
   width: 32.7rem;
   height: 4.8rem;
-  border-bottom: 1px solid #E3E4F1 ;
-  border-radius: 0.5rem;
+  border-bottom: 1px solid ${({ isDark }) => !isDark ? "#383947" : "#E3E4F1"};
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   padding: 2rem;
-  background-color: white;
   font-weight: 400;
   font-size: 1.2rem;
   line-height: 100%;
@@ -155,6 +163,11 @@ const List = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: ${({ isDark }) => 
+    !isDark 
+  ? "#25273D"
+  : "white"
+  };
 
 
 `
@@ -169,6 +182,7 @@ const DeleteIcon = styled.img`
 const CheckBox = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 1rem;
 
 
 `
@@ -179,29 +193,63 @@ const ListContainer = styled.ul`
   list-style: none; /* remove bullets */
 `
 
-const TodoFooter = styled.div`
+const TodoFooter = styled.div<{isDark: boolean}>`
+   width: 32.7rem;
+  height: 4.8rem;
+  background-color: ${({ isDark}) => 
+    !isDark 
+  ? "#25273D"
+  : "white"
+  };
+  margin: 0;
   display: flex;
   justify-content: space-between;
+  padding: 2rem;
+  align-items: center;
   width: 32.7rem;
   height: 4.8rem;
-  padding-left: 1rem;
+  border-radius: 0.5rem;
   font-size: 1.2rem;
-  color: #9495A5;
+  color: ${({ isDark }) => 
+    !isDark 
+    ? "#5B5E7E"
+    : "#9495A5"
+  } ;
   cursor: pointer;
 `
-const TodoSecondFooter = styled.div`
+const TodoSecondFooter = styled.div<{isDark: boolean}>`
   display: flex;
-  justify-content: space-around;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
   width: 32.7rem;
   height: 4.8rem;
-  padding-left: 1rem;
+  border-radius: 0.5rem;
   font-size: 1.4rem;
-  margin-top: 5rem;
+ 
+  background-color: ${({ isDark }) => 
+   !isDark 
+   ? "#25273D"
+   : "white"
+  };
+ 
 
  
 `
 
-const SecondFooterSpan = styled.span `
+const SecondFooterSpan = styled.span<{isDark: boolean}> `
+  
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 100%;
+  letter-spacing: -0.19px;
+  color: ${({ isDark }) => 
+  !isDark 
+  ? "#5B5E7E"
+  : "#9495A5"
+  };
+
   &:hover {
     color: #3A7CFD;
   }
