@@ -131,7 +131,7 @@ const StyledInput = styled.input<{isDark: boolean}>`
   background-color: ${({ isDark}) => 
     isDark 
     ? "white"
-    : "#393A4B"
+    : "#25273D"
   };
 
 
@@ -188,7 +188,7 @@ const CheckBox = styled.div`
 `
 
 const ListContainer = styled.ul`
-  margin: 0;
+  margin-top: 2rem;
   padding: 0;
   list-style: none; /* remove bullets */
 `
@@ -226,7 +226,7 @@ const TodoSecondFooter = styled.div<{isDark: boolean}>`
   height: 4.8rem;
   border-radius: 0.5rem;
   font-size: 1.4rem;
- 
+  margin-top: 2rem;
   background-color: ${({ isDark }) => 
    !isDark 
    ? "#25273D"

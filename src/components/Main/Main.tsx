@@ -56,7 +56,6 @@ const Wrapper = styled.div<{isDark: boolean}>`
   background-repeat: no-repeat;
   background-size: contain;
 
-  
 `
 
 const Header = styled.div`
@@ -72,6 +71,7 @@ const Image = styled.img`
 height: 2rem;
 opacity: 1;
 border-width: 0.1rem;
+cursor: pointer;
 
 `
 
