@@ -49,18 +49,7 @@ const handleDeleteCompleted = () => {
   setTodos((prevTodos) => [...prevTodos.filter((todo) => !todo.isDone)] )
 }
 
-const handleShowAll = () => {
-  setTodos((prevTodos) => [...prevTodos.filter((todo) => {
-    return true
-  })])
-}
-const handleShowCompleted = () => {
-  setTodos((prevTodos) => [...prevTodos.filter((todo) => todo.isDone)])
-}
 
-const handleShowActive = () => {
-  setTodos((prevTodos) => [...prevTodos.filter((todo) => !todo.isDone)])
-}
 
 const filteredTodos = todos.filter(todo => {
   if(filter === "active") return !todo.isDone;
