@@ -13,11 +13,13 @@ type TPropsTypes = {
     setIsDark: React.Dispatch<React.SetStateAction<boolean>>//ეს მერე გააკეთე
 }
 
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 
 export default function Todos({todos, setTodos, inputValue, setInputValue}: TPropsTypes) {
+    const [filter, setFilter] = useState<"all" | "active" | "completed">("all")
+
     const handleAdd = () => {
     if(!inputValue.trim()) return; 
     setTodos(prevTodos => [...prevTodos, {text: inputValue, isDone: false, id: Math.random()}])
@@ -60,6 +62,11 @@ const handleShowActive = () => {
   setTodos((prevTodos) => [...prevTodos.filter((todo) => !todo.isDone)])
 }
 
+const filteredTodos = todos.filter(todo => {
+  if(filter === "active") return !todo.isDone;
+  if(filter === "completed") return todo.isDone;
+  return true; 
+})
   return (
     <TodosContainer>
         <StyledInput 
@@ -70,7 +77,7 @@ const handleShowActive = () => {
           onKeyDown={handleKeyDown}
         />
       <ListContainer>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           
             <List key={todo.id} style={{textDecoration: todo.isDone ? "line-through" : "~"}}>
               <CheckBox>
@@ -83,16 +90,16 @@ const handleShowActive = () => {
             </List>
         ))}
         </ListContainer>
-
+      {todos.length > 0 && (
         <TodoFooter>
           <span>{counter} items left</span>
           <div onClick={handleDeleteCompleted}>delete completed</div>
         </TodoFooter>
-
+      )}
         <TodoSecondFooter>
-          <SecondFooterSpan onClick={handleShowAll}>All</SecondFooterSpan>
-          <SecondFooterSpan onClick={handleShowActive}>Active</SecondFooterSpan>
-          <SecondFooterSpan onClick={handleShowCompleted}>Completed</SecondFooterSpan>
+          <SecondFooterSpan onClick={() => setFilter("all")}>All</SecondFooterSpan>
+          <SecondFooterSpan onClick={() => setFilter("active")}>Active</SecondFooterSpan>
+          <SecondFooterSpan onClick={() => setFilter("completed")}>Completed</SecondFooterSpan>
         </TodoSecondFooter>
       </TodosContainer>
   )
@@ -102,6 +109,8 @@ const TodosContainer = styled.div`
  display: flex;
  flex-direction: column;
  gap: 2rem;
+
+
 
 `
 
@@ -178,6 +187,7 @@ const TodoFooter = styled.div`
   padding-left: 1rem;
   font-size: 1.2rem;
   color: #9495A5;
+  cursor: pointer;
 `
 const TodoSecondFooter = styled.div`
   display: flex;
@@ -186,6 +196,7 @@ const TodoSecondFooter = styled.div`
   height: 4.8rem;
   padding-left: 1rem;
   font-size: 1.4rem;
+  margin-top: 5rem;
 
  
 `

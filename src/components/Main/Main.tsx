@@ -14,7 +14,9 @@ export default function Main() {
     const [todos, setTodos] = useState<Todo[]>([])
     const [inputValue, setInputValue] = useState<string>("")
     const [isDark, setIsDark] = useState<boolean>(false)
-    console.log(todos.length)
+    
+
+  
   return (
    <Wrapper>
     <Header>
@@ -38,15 +40,16 @@ const Wrapper = styled.div`
   font-family: "Josefin Sans", sans-serif;;
   width: 37.5rem; 
   height: 100vh;
-  margin-top: 10.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
   background-image: url("images/bg-mobile-light.jpg");
-  background-color: white;
+  background-color: #F8F8FF;
   background-repeat: no-repeat;
   background-size: contain;
+
+  
   
 `
 
