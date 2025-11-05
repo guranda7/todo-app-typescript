@@ -28,7 +28,7 @@ export default function Main() {
           inputValue = {inputValue}
           setInputValue = {setInputValue}
           isDark = {isDark}
-          setIsDark = {setIsDark}
+          
    />
     
    </Wrapper>

@@ -17,7 +17,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 
-export default function Todos({todos, setTodos, inputValue, setInputValue, isDark,}: TPropsTypes) {
+export default function Todos({todos, setTodos, inputValue, setInputValue, isDark}: TPropsTypes) {
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all")
 
     const handleAdd = () => {
