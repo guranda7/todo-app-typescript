@@ -10,14 +10,14 @@ type TPropsTypes = {
     inputValue: string
     setInputValue : React.Dispatch<React.SetStateAction<string>>
     isDark: boolean;
-    setIsDark: React.Dispatch<React.SetStateAction<boolean>>//ეს მერე გააკეთე
+    
 }
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
 
-export default function Todos({todos, setTodos, inputValue, setInputValue, isDark, setIsDark}: TPropsTypes) {
+export default function Todos({todos, setTodos, inputValue, setInputValue, isDark,}: TPropsTypes) {
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all")
 
     const handleAdd = () => {

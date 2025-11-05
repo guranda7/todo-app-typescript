@@ -7,7 +7,7 @@ type Todo = {
 }
 import styled from 'styled-components'
 import { useState } from 'react'
-import css from 'styled-components'
+
 
 import Todos from '../Todos/Todos'
 export default function Main() {
