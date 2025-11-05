@@ -69,9 +69,9 @@ const filteredTodos = todos.filter(todo => {
       <ListContainer>
         {filteredTodos.map((todo) => (
           
-            <List isDark={isDark} key={todo.id} style={{textDecoration: todo.isDone ? "line-through" : "~"}}>
+            <List isDark={isDark} key={todo.id} style={{textDecoration: todo.isDone ? "line-through" : ""}}>
               <CheckBox>
-                <input type="checkbox" onChange={(event) => handleCheck(todo.id, event) } />
+                <input type="checkbox" checked={todo.isDone} onChange={(event) => handleCheck(todo.id, event) } />
                 {todo.text}
               </CheckBox>
                 
