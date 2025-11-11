@@ -72,6 +72,7 @@ const filteredTodos = todos.filter(todo => {
             <List isDark={isDark} key={todo.id} style={{textDecoration: todo.isDone ? "line-through" : ""}}>
               <CheckBox>
                 <input type="checkbox" checked={todo.isDone} onChange={(event) => handleCheck(todo.id, event) } />
+                <span />
                 {todo.text}
               </CheckBox>
                 
@@ -135,6 +136,12 @@ const StyledInput = styled.input<{isDark: boolean}>`
     text-align: left; /* align placeholder text */
     /* text-align: right; */ /* align right */
   }
+
+    @media(min-width: 780px) {
+      width: 54rem;
+      height: 6.4rem;
+    }
+  
 `
 
 const List = styled.li<{isDark: boolean}>`
@@ -158,6 +165,10 @@ const List = styled.li<{isDark: boolean}>`
   : "white"
   };
 
+  @media(min-width: 780px) {
+    width: 54rem;
+    height: 6.4rem;
+  }
 
 `
 
@@ -166,15 +177,58 @@ const DeleteIcon = styled.img`
   height: 1.2rem;
   opacity: 1;
   align-self: left;
+  cursor: pointer;
+
+
+ 
 `
 
-const CheckBox = styled.div`
+/*const CheckBox = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
 
 
+`*/
+
+const CheckBox = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+
+ 
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: all 0.2s ease;
+  }
+
+input:checked + span {
+  background: linear-gradient(to right, #55DDFF 0%, #C058F3 100%);
+  border: none; /* optionally remove border if gradient is enough */
+}
+
+
+  input:checked + span::after {
+    content: "✔";
+    color: white;
+    font-size: 1rem;
+  }
+
+  input {
+    display: none; 
+  }
 `
+
 
 const ListContainer = styled.ul`
   margin-top: 2rem;
@@ -205,6 +259,11 @@ const TodoFooter = styled.div<{isDark: boolean}>`
     : "#9495A5"
   } ;
   cursor: pointer;
+
+   @media(min-width: 780px) {
+    width: 54rem;
+    height: 6.4rem;
+  }
 `
 const TodoSecondFooter = styled.div<{isDark: boolean}>`
   display: flex;
@@ -222,7 +281,10 @@ const TodoSecondFooter = styled.div<{isDark: boolean}>`
    : "white"
   };
  
-
+ @media(min-width: 780px) {
+    width: 54rem;
+    height: 6.4rem;
+  }
  
 `
 
@@ -244,4 +306,10 @@ const SecondFooterSpan = styled.span<{isDark: boolean}> `
   }
 
   cursor: pointer;
+
+   @media(min-width: 780px) {
+    width: 54rem;
+    height: 6.4rem;
+  }
 `
+

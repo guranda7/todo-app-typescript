@@ -56,6 +56,19 @@ const Wrapper = styled.div<{isDark: boolean}>`
   background-repeat: no-repeat;
   background-size: contain;
 
+  @media(min-width: 780px){
+   width: 144rem;
+   background-image: ${({ isDark }) => 
+    isDark 
+  ?
+  'url("images/bg-desktop-light.jpg")'
+  :'url("images/bg-desktop-dark.jpg")'};
+  background-color: ${({ isDark }) => 
+    isDark 
+    ? "#F8F8FF"
+    : "black"
+  };
+  }
 `
 
 const Header = styled.div`
