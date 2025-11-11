@@ -284,6 +284,8 @@ const TodoSecondFooter = styled.div<{isDark: boolean}>`
  @media(min-width: 780px) {
     width: 54rem;
     height: 6.4rem;
+    padding-top: 5rem;
+    padding-left: 6rem;
   }
  
 `
